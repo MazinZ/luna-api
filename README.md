@@ -8,7 +8,7 @@
 
 ## Clone the repository
 
-`git clone https://github.com/MazinZ/luna-web.git`
+`git clone https://github.com/MazinZ/luna-api.git`
 
 ## Init git-flow
 
