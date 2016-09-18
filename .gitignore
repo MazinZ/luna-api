@@ -1,0 +1,18 @@
+lunaenv/
+
+# Not needed since client will be on different platform
+# bower_components/
+# node_modules/
+
+# Random 
+get-pip.py
+.vscode/
+
+# Build folders
+dist/*.*
+__pycache__/
+migrations/
+
+*.pyc
+*.sqlite3
+.DS_Store
