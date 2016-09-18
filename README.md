@@ -22,7 +22,7 @@ python get-pip.py
 ```
 
 ## Create a virtual environment
-cd into the luna-web folder that you cloned and run:
+cd into the luna-api folder that you cloned and run:
 
 ```
 sudo pip install virtualenv
@@ -30,25 +30,13 @@ virtualenv -p python3 lunaenv
 source lunaenv/bin/activate
 ```
 
-Run the following commands (from the /luna-web directory) to setup the client and server:
+Run the following commands (from the /luna-api directory):
 
-### Client
-```
-brew install npm
-cd angular
-npm install
-cd app/js/external_libs
-bower install
-```
-
-These should also be done from the /luna-web directory:
-
-### Server
 ```
 pip install -r requirements.txt
-cd django
 python manage.py migrate
-python manage.py runserver
 ```
 
-After all that is finished, open a new terminal window, go back to the root of the project (/luna-web) and run `foreman start`.
+After all that is finished, make sure you're in the root of the project (/luna-api) and run `foreman start`.
+The api should start up at localhost:5000.
+
