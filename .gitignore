@@ -16,3 +16,5 @@ migrations/
 *.pyc
 *.sqlite3
 .DS_Store
+gunicorn_start
+run/
