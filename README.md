@@ -26,7 +26,7 @@ cd into the luna-api folder that you cloned and run:
 
 ```
 sudo pip install virtualenv
-virtualenv -p python3 lunaenv
+virtualenv lunaenv
 source lunaenv/bin/activate
 ```
 
@@ -38,5 +38,5 @@ python manage.py migrate
 ```
 
 After all that is finished, make sure you're in the root of the project (/luna-api) and run `foreman start`.
-The api should start up at localhost:5000.
+The api should start up at localhost:8000.
 
