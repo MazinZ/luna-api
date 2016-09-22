@@ -13,12 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from faces.views import *
+import djoser
+#from rest_framework_nested import routers
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/v1/faces/$', FacesView.as_view()),
+    #url(r'^api/v1/faces/$', FacesView.as_view()),
+    url(r'^api/v1/auth/', include('djoser.urls.authtoken')),
+    url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 
 ]
+print djoser.urls.authtoken

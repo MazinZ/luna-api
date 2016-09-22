@@ -3,9 +3,9 @@ from django.shortcuts import render
 # Create your views here.
 from rest_framework import views
 from rest_framework.response import Response
-from rest_framework.parsers import FileUploadParser
+from rest_framework.parsers import FileUploadParser, MultiPartParser
 
-import cv2
+"""import cv2
 import urllib
 
 class FacesView(views.APIView):
@@ -18,6 +18,7 @@ class FacesView(views.APIView):
         window = request.DATA.get('window', None)
         img = request.FILES['img']
         if window and img:
+            #open(filename, 'wb+') as img:
             image = cv2.imread(img)
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -41,4 +42,4 @@ class FacesView(views.APIView):
             return Response({"count": len(faces)})
         else:
             return Response({"count": "unknown"})
-            
+            """
