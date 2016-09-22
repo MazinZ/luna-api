@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from faces.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^api/v1/faces/$', FacesView.as_view()),
+
 ]
