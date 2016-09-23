@@ -24,7 +24,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     #url(r'^api/v1/faces/$', FacesView.as_view()),
     url(r'^api/v1/auth/', include('djoser.urls.authtoken')),
-    url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    #url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 
 ]
-print djoser.urls.authtoken

@@ -15,8 +15,8 @@ class AccountManager(BaseUserManager):
         account.save()
         return account
     
-    def create_superuser(self, email, password, **kwargs):
-        account = self.create_user(email, password=None, **kwargs)
+    def create_superuser(self, password, **kwargs):
+        account = self.create_user(password=None, **kwargs)
         account.is_admin = True
         account.save()
         return account

@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'faces',
-    #'users',
+    'users',
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
-    'oauth2_provider',
+    #'oauth2_provider',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'corsheaders.middleware.CorsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'lunaweb.urls'
@@ -132,4 +134,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-#AUTH_USER_MODEL = 'users.Account'
+AUTH_USER_MODEL = 'users.Account'
+#CORS_ORIGIN_ALLOW_ALL = True
