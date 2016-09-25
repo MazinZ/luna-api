@@ -18,3 +18,5 @@ migrations/
 .DS_Store
 gunicorn_start
 run/
+Luna-cc6e11f09f31.json
+token.py
