@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from random import choice
+from string import ascii_lowercase, digits
 
 # Create your models here.
 
@@ -10,7 +12,8 @@ class AccountManager(BaseUserManager):
         if not kwargs.get('username'):
             raise ValueError('Users must have a username.')
         
-        account = self.model(username=kwargs.get('username'))
+        #account = self.model(username=kwargs.get('username'))
+        account = self.model(username=self.gen_random_username())
         account.set_password(password)
         account.save()
         return account
@@ -20,6 +23,17 @@ class AccountManager(BaseUserManager):
         account.is_admin = True
         account.save()
         return account
+        
+    def gen_random_username(self):        
+        username = ''.join([choice(ascii_lowercase+digits) for i in xrange(8)])
+        
+        username = '-'.join([username[start:start+4] for start in range(0, len(username), 4)])
+        
+        try:
+            Account.objects.get(username=username)
+            return self.gen_random_username()
+        except Account.DoesNotExist:
+            return username;
     
 class Account(AbstractBaseUser):
     username = models.CharField(max_length=40, unique=True)
@@ -31,11 +45,9 @@ class Account(AbstractBaseUser):
     
     objects = AccountManager()
     
-    #REQUIRED_FIELDS = ['username']
     USERNAME_FIELD = 'username'
     
     def __unicode__(self):
         return self.username
    
-    
 
