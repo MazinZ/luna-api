@@ -12,7 +12,7 @@ def create_firebase_token(uid, username):
   #jsonFile = json.loads(content)
 
   # Get your service account's email address and private key from the JSON key file
-  service_account_email = "service-account@my-project-abc123.iam.gserviceaccount.com"
+  service_account_email = "token-gen@luna-c2c2f.iam.gserviceaccount.com"
   private_key = RSA.importKey(FIREBASE_KEY)
   try:
     payload = {
