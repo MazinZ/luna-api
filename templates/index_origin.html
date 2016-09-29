@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html ng-app="luna">
+
+<head>
+  <title>Home</title>
+      <base href="/" />
+  {% include 'stylesheets.html' %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+      <div ui-view="nav"></div>
+      <div class="container">
+        <div ui-view="content"></div>
+      </div>
+{% include 'javascripts.html' %}
+
+</body>
+</html>
