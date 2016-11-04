@@ -24,7 +24,7 @@ def create_firebase_token(uid, username):
         "username": username
       }
     }
-    exp = datetime.timedelta(weeks=60)
+    exp = datetime.timedelta(minutes=60)
     return jwt.generate_jwt(payload, private_key, "RS256", exp)
   except Exception as e:
     print "Error creating custom token: " + e.message
