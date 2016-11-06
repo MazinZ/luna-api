@@ -10,7 +10,7 @@ import firebasetoken
 
 def login_user(request, user):
     token, _ = authtoken.models.Token.objects.get_or_create(user=user)
-    firebase_token, _ = firebasetoken.models.FirebaseToken.objects.get_or_create(user=user)
+    firebase_token = firebasetoken.models.FirebaseToken.objects.create(user=user)
     user_logged_in.send(sender=user.__class__, request=request, user=user)
     return token, firebase_token
 
