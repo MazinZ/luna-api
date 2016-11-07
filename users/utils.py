@@ -10,7 +10,11 @@ import firebasetoken
 
 def login_user(request, user):
     token, _ = authtoken.models.Token.objects.get_or_create(user=user)
-    firebase_token = firebasetoken.models.FirebaseToken.objects.create(user=user)
+    firebase_token, created = firebasetoken.models.FirebaseToken.objects.get_or_create(user=user)
+    # An ugly solution to updating token upon each login. update_or_create was acting strangely.
+    if not created:
+        firebasetoken.models.FirebaseToken.objects.filter(user=user).delete()
+        firebase_token, created = firebasetoken.models.FirebaseToken.objects.get_or_create(user=user)
     user_logged_in.send(sender=user.__class__, request=request, user=user)
     return token, firebase_token
 
