@@ -25,7 +25,7 @@ from lunaweb.views import IndexView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    #url(r'^api/v1/faces/$', FacesView.as_view()),
+    url(r'^api/v1/faces/$', FacesView.as_view()),
     url(r'^api/v1/auth/login/$', FirebaseLoginView.as_view()),
     url(r'^api/v1/auth/delete/$', DeleteUserView.as_view()),
     #url(r'^api/v1/auth/logout/$', FirebaseLogoutView.as_view()),

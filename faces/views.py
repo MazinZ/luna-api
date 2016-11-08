@@ -4,22 +4,24 @@ from django.shortcuts import render
 from rest_framework import views
 from rest_framework.response import Response
 from rest_framework.parsers import FileUploadParser, MultiPartParser
+from faces.serializers import FacesSerializer
 
-"""import cv2
+import cv2
 import urllib
+from faces.utils import get_image
 
 class FacesView(views.APIView):
     permission_classes = []
-    parser_classes = (FileUploadParser,)
+    #parser_classes = (FileUploadParser,)
+    serializer_class = FacesSerializer
 
     def put(self, request, *args, **kwargs):
         cascPath = urllib.urlretrieve("https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml")[0]
         faceCascade = cv2.CascadeClassifier(cascPath)
-        window = request.DATA.get('window', None)
-        img = request.FILES['img']
-        if window and img:
-            #open(filename, 'wb+') as img:
-            image = cv2.imread(img)
+        window = 40
+        url = request.POST.get("url", None)        
+        if window and url:
+            image = get_image(url)
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
             # Detect faces in the image
@@ -31,15 +33,7 @@ class FacesView(views.APIView):
             flags = cv2.cv.CV_HAAR_SCALE_IMAGE
             )
 
-            print "Found {0} faces!".format(len(faces))
-
-            # Draw a rectangle around the faces
-            for (x, y, w, h) in faces:
-                cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
-
-                cv2.imshow("Faces found", image)
-                cv2.waitKey(0)
             return Response({"count": len(faces)})
         else:
             return Response({"count": "unknown"})
-            """
+            

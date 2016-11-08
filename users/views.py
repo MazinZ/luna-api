@@ -5,6 +5,7 @@ from djoser.utils import ActionViewMixin
 from rest_framework import generics, permissions, status, response, views
 from djoser import serializers
 from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
 import djoser.views
 
 # Create your views here.
