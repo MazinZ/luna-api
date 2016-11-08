@@ -4,6 +4,7 @@ from django.contrib.auth import user_logged_in, user_logged_out
 import datetime
 from rest_framework import response, status, authtoken
 import firebasetoken
+from users.models import Account
 
 # Get your service account's email address and private key from the JSON key file
 
@@ -22,3 +23,8 @@ def logout_user(request):
     authtoken.models.Token.objects.filter(user=request.user).delete()
     firebasetoken.models.FirebaseToken.objects.filter(user=request.user).delete()
     user_logged_out.send(sender=request.user.__class__, request=request, user=request.user)
+
+def delete_user(request):
+    username = request.user.username
+    Account.objects.get(username = username).delete()
+  

@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from faces.views import *
 import djoser
-from users.views import FirebaseLoginView, FirebaseLogoutView
+from users.views import FirebaseLoginView, FirebaseLogoutView, DeleteUserView
 from lunaweb.views import IndexView
 
 #from rest_framework_nested import routers
@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     #url(r'^api/v1/faces/$', FacesView.as_view()),
     url(r'^api/v1/auth/login/$', FirebaseLoginView.as_view()),
+    url(r'^api/v1/auth/delete/$', DeleteUserView.as_view()),
     #url(r'^api/v1/auth/logout/$', FirebaseLogoutView.as_view()),
     url(r'^api/v1/auth/', include('djoser.urls.authtoken')),
     url(r'^.*$', IndexView.as_view(), name='index'),

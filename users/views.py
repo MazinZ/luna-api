@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from firebasetoken.serializers import *
-from users.utils import login_user, logout_user
+from users.utils import login_user, logout_user, delete_user
 from djoser.utils import ActionViewMixin
 from rest_framework import generics, permissions, status, response, views
 from djoser import serializers
@@ -43,4 +43,16 @@ class FirebaseLogoutView(djoser.views.LogoutView):
 
     def post(self, request):
         logout_user(request)
+        return response.Response(status=status.HTTP_204_NO_CONTENT)
+
+class DeleteUserView(views.APIView):
+    """
+    Use this endpoint to delete a user. Note: you should also delete the user from Firebase manually.
+    """
+    permission_classes = (
+        permissions.IsAuthenticated,
+    )
+
+    def post(self, request):
+        delete_user(request)
         return response.Response(status=status.HTTP_204_NO_CONTENT)
