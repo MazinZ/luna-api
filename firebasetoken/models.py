@@ -22,11 +22,11 @@ class FirebaseToken(models.Model):
 
     def save(self, *args, **kwargs):
         if self.user and not self.key:
-            self.key = self.generate_key(self.user.id, self.user.username)
+            self.key = self.generate_key(self.user)
         return super(FirebaseToken, self).save(*args, **kwargs)
 
-    def generate_key(self, userid, username):
-        return create_firebase_token(userid, username)
+    def generate_key(self, user):
+        return create_firebase_token(user)
 
 
     def __str__(self):

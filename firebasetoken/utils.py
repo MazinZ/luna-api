@@ -5,7 +5,7 @@ import datetime
 import json
 from firebasetoken.token import FIREBASE_KEY
 
-def create_firebase_token(uid, username):
+def create_firebase_token(user):
   
   #f = open('/Users/mazin/Development/luna/Luna-cc6e11f09f31.json', 'r')
   #content = f.read()
@@ -19,9 +19,10 @@ def create_firebase_token(uid, username):
       "iss": service_account_email,
       "sub": service_account_email,
       "aud": "https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit",
-      "uid": uid,
+      "uid": user.id,
       "claims": {
-        "username": username
+        "username": user.username,
+        "is_admin": user.is_admin
       }
     }
     exp = datetime.timedelta(minutes=60)
