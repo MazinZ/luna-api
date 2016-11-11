@@ -22,6 +22,8 @@ from lunaweb.views import IndexView
 
 #from rest_framework_nested import routers
 
+admin.site.index_template = 'admin/customindex.html'
+admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
