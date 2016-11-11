@@ -1,9 +1,8 @@
-<html>
+<html ng-app="luna">
     <head>
         {% include '../javascripts.html' %}
-
+        <base href="/" />
         <script type="text/javascript" src="/app/dist/all.js"></script>
-        <script type="text/javascript" src="./admin.js"></script>
         <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" />
     <style>
     #branding h2 {
@@ -15,7 +14,7 @@
     </style>
     </head>
 
-    <body>
+    <body ng-controller="AdminController">
         <div id="container">
             {% if not is_popup %}
             <!-- Header -->
@@ -77,8 +76,19 @@
 
                 <!-- Normally this would be put in its own file -->
                 
-                <input type="submit" value="Export Data"> </input>
-
+                <input type="submit" value="Export Data" ng-click="showSubmit=true"> </input>
+                <div ng-if="showSubmit">
+                    <br>
+                    <form role="form" ng-submit="sign_in()" >
+                    <p> Please confirm your username and password below and press "Confirm Export" </p>
+                    <div ng-show="error" ng-bind="error"></div>
+                        <span class="input-label">Username</span>
+                        <input type="text" placeholder="Username" class="form-control" ng-model="user.username"  />
+                        <span class="input-label">Password</span>
+                        <input type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" class="form-control" ng-model="user.password" />
+                    <input type="submit" value="Confirm Export" ng-submit="signIn()"> </button>
+                    </form>
+                </div>
 
                 <br class="clear" />
             </div>
@@ -86,5 +96,17 @@
 
             {% block footer %}<div id="footer"></div>{% endblock %}
         </div>
+        <script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
+        <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAJEJ5V2O2uv6cbdE61a-tCeUWRNmIJH6c",
+            authDomain: "luna-c2c2f.firebaseapp.com",
+            databaseURL: "https://luna-c2c2f.firebaseio.com",
+            storageBucket: "luna-c2c2f.appspot.com",
+            messagingSenderId: "1070742680504"
+        };
+        firebase.initializeApp(config);
+        </script>
     </body>
 </html>
