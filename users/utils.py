@@ -5,7 +5,6 @@ import datetime
 from rest_framework import response, status, authtoken
 import firebasetoken
 from users.models import Account
-
 # Get your service account's email address and private key from the JSON key file
 
 
@@ -28,3 +27,15 @@ def delete_user(request):
     username = request.user.username
     Account.objects.get(username = username).delete()
   
+def flattenjson( b, delim ):
+    val = {}
+    for i in b.keys():
+        if isinstance( b[i], dict ):
+            get = flattenjson( b[i], delim )
+            for j in get.keys():
+                val[ i + delim + j ] = get[j]
+        else:
+            val[i] = b[i]
+
+    return val
+

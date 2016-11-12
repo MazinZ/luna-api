@@ -1,12 +1,16 @@
 from django.shortcuts import render
 from firebasetoken.serializers import *
-from users.utils import login_user, logout_user, delete_user
+from users.utils import login_user, logout_user, delete_user, flattenjson
 from djoser.utils import ActionViewMixin
 from rest_framework import generics, permissions, status, response, views
 from djoser import serializers
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
 import djoser.views
+import time, csv
+from users.serializers import ExportSerializer
+from django.http import HttpResponse
+
 
 # Create your views here.
 
@@ -57,3 +61,38 @@ class DeleteUserView(views.APIView):
     def post(self, request):
         delete_user(request)
         return response.Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class GenerateFileOutputView(views.APIView):
+    """
+    This endpoint is used to generate an output file given JSON from the Firebase database
+    """
+    serializer_class = ExportSerializer
+    permission_class = (
+        #permissions.IsAdminUser,
+        #permissions.IsAuthenticated,
+    )
+    def post(self, request):
+        response = HttpResponse(content_type='text/csv')
+        input = []
+        content = request.body
+        json_input = json.loads(content)
+        json_input = json_input['content']
+
+        for i in json_input:
+            input.append(json_input[i])
+        
+
+        input = map( lambda x: flattenjson( x, "__" ), input)
+        columns = map( lambda x: x.keys(), input )
+        columns = reduce( lambda x,y: x+y, columns )
+        columns = list( set( columns ) )
+        f = csv.writer(response)
+        f.writerow(columns)
+
+        for i_r in input:
+            f.writerow( map( lambda x: i_r.get( x, "" ), columns ) )
+        current_time = time.strftime("%Y/%m/%d")
+        response['Content-Disposition'] = 'attachment; filename="data_' + current_time + '.csv"'
+        return response
+
